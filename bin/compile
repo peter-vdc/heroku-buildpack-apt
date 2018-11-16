@@ -68,9 +68,12 @@ for PACKAGE in $(cat $BUILD_DIR/Aptfile | grep -v -s -e "^:repo:"); do
     curl -s -L -z $PACKAGE_FILE -o $PACKAGE_FILE $PACKAGE 2>&1 | indent
   else
     topic "Fetching .debs for $PACKAGE"
-    apt-get $APT_OPTIONS -y --allow -d install --reinstall $PACKAGE | indent
+    apt-get $APT_OPTIONS -y -d install --reinstall $PACKAGE | indent
   fi
 done
+
+topic "Updating apt caches"
+apt-get $APT_OPTIONS update | indent
 
 mkdir -p $BUILD_DIR/.apt
 
