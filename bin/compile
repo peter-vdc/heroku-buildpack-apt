@@ -61,7 +61,7 @@ apt-get $APT_OPTIONS update | indent
 
 for REPO_KEY in $(cat $BUILD_DIR/Aptfile | grep -v -s -e "^:repo-key:"); do
     topic "update repo-key: $REPO_KEY"
-    wget -q -O - $REPO_KEY | sudo apt-key add -
+    apt-key adv --fetch-keys $REPO_KEY
 done
 
 for PACKAGE in $(cat $BUILD_DIR/Aptfile | grep -v -s -e "^:repo:"); do
