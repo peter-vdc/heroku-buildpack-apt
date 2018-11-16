@@ -58,8 +58,8 @@ APT_OPTIONS="$APT_OPTIONS -o dir::etc::sourcelist=$APT_SOURCES"
 
 for REPO_KEY in $(cat $BUILD_DIR/Aptfile | grep -s -e "^\:repo-key\:"); do
     REPO_KEY_NAME=$(echo $REPO_KEY | sed "s/^:repo-key:\(.*\)\s*$/\1/g")
-    topic "Adding repo-key: $REPO_KEY"
-    apt-key adv --fetch-keys $REPO_KEY
+    topic "Adding repo-key: $REPO_KEY_NAME"
+    apt-key adv --fetch-keys $REPO_KEY_NAME
 done
 
 topic "Updating apt caches"
