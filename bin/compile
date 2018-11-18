@@ -65,7 +65,7 @@ for REPO_KEY in $(cat $BUILD_DIR/Aptfile | grep -s -e "^\:repo-key\:"); do
 done
 
 topic "Updating apt caches"
-apt-get $APT_OPTIONS update | indent
+apt-get $APT_OPTIONS --allow-unauthenticated update | indent
 
 
 for PACKAGE in $(cat $BUILD_DIR/Aptfile | grep -v -s -e "^\:repo(-key)?\:"); do
